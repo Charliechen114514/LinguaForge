@@ -1,0 +1,3 @@
+# LinguaForge
+
+LinguaForge is a WIP Project helps fast setup a multi-language-support for a Github repo. Progress is activately making... waiting for further issue...
