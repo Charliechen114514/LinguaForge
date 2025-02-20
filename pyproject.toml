@@ -1,0 +1,35 @@
+[project]
+name = "linguaforge"
+version = "0.1.0"
+description = "This is a tools help generate multi-language-design"
+authors = [
+    {name = "charliechen114514",email = "725610365@qq.com"}
+]
+license = {text = "GPL-3.0"}
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "deep-translator (>=1.11.4,<2.0.0)",
+    "chardet (>=5.2.0,<6.0.0)",
+    "typer (>=0.15.1,<0.16.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "tsinghua"
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+priority = "explicit"
+
+
+[tool.poetry.dependencies]
+deep-translator = {source = "tsinghua"}
+chardet = {source = "tsinghua"}
+typer = {source = "tsinghua"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+
