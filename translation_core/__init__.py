@@ -1,3 +1,4 @@
 from translation_core.native_support.driver.google_translator_driver import Document_GoogleTransDriver
 from translation_core.native_support.spliter.default_spliter import DefaultSpliter, TextToken
 from translation_core.doc_summon_controller import DocumentSummon
+from translation_core.doc_translator import DocumentTranslator

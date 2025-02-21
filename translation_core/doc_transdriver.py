@@ -29,3 +29,7 @@ class DocumentDriverBase(metaclass=ABCMeta):
     @abstractmethod
     def translate_text(self, text: str) -> str:
         pass
+
+    @abstractmethod
+    def supportive_dest_lang(self) -> list[str]:
+        pass

@@ -1,0 +1,12 @@
+class CLICommandHelper:
+    DOCUMENT_PATH_STR:str = "The Path for the documentations" 
+    DOCUMENT_PATH_PROMPT: str = "Submit the documentation path"
+    DEST_LANG_STR: str = "The Destination target Language you select"
+    DEST_LANG_PROMPT: str = "Commit the dest language for translations"
+    CONFIG_GEN_STR: str = "generate a config template"
+    CONFIG_GEN_PROMPT: str = "Commit a config file name for generations"
+    CONFIGTYPE_GEN_STR: str = "types of a config template"
+    CONFIGTYPE_GEN_PROMPT: str = "Commit a config file type for generations"    
+    DEST_DOC_SUMMON_PATH: str = "Path for the place for summon the result"
+    COLON_STR: str = "the split colon string for splitions, this will help boost the translation quality!"
+    COLON_PROMPT: str = "Submit the colon for the splitions"

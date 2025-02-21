@@ -10,6 +10,14 @@ class Document_GoogleTransDriver(DocumentDriverBase):
     def translate_text(self, text: str) -> str:
         if self.src_lang_type == "":
             self.src_lang_type = "auto"
+        if self.dest_lang_type.lower() == "zh-cn":
+             self.dest_lang_type = "zh-CN"
+        if self.dest_lang_type.lower() == "en":
+            self.dest_lang_type = "en"
         self.__translator_pvt = GoogleTranslator(
             self.src_lang_type, self.dest_lang_type)
         return self.__translator_pvt.translate(text)
+    
+    @staticmethod
+    def supportive_dest_lang() -> list[str]:
+        return GoogleTranslator().get_supported_languages()

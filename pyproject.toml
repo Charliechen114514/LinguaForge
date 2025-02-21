@@ -10,8 +10,8 @@ readme = "README.md"
 requires-python = ">=3.12,<4.0"
 dependencies = [
     "deep-translator (>=1.11.4,<2.0.0)",
-    "chardet (>=5.2.0,<6.0.0)",
-    "typer (>=0.15.1,<0.16.0)"
+    "typer (>=0.15.1,<0.16.0)",
+    "loguru (>=0.7.3,<0.8.0)"
 ]
 
 
@@ -27,8 +27,8 @@ priority = "explicit"
 
 [tool.poetry.dependencies]
 deep-translator = {source = "tsinghua"}
-chardet = {source = "tsinghua"}
 typer = {source = "tsinghua"}
+loguru = {source = "tsinghua"}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"

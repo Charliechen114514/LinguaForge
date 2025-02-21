@@ -7,11 +7,12 @@ class DocumentSummon:
         self.__path_write = default_path
     
     @staticmethod
-    def default_policy_name(doc_path: str, suffix: str) -> str:
-        return Path(doc_path).parent / str(Path(doc_path).stem + "_" + suffix + Path(doc_path).suffix)
+    def default_policy_name(doc_path: str, lang_type: str) -> str:
+        return Path(doc_path).parent / str(Path(doc_path).stem + "_" + lang_type + Path(doc_path).suffix)
 
     def redirect_path(self, path: str):
         self.__path_write = path
 
-    def summon_document(self):
+    def summon_document(self) -> str:
         RawDocumentWriter.write_document_buffer(self.__path_write, self.__ready_write)
+        return str(self.__path_write)
