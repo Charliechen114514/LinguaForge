@@ -11,6 +11,13 @@ config_content = \
 # others will use the default!
 """
 
+batch_special_content = \
+"""
+# For Batches type, you must specify the generations type
+# all-in-one:   summon the translations in a given root dir
+# insert-in:    summon the translations as the siblings of original doc
+"""
+
 STR_TYPE_SIN_FILE = "single-file"
 STR_TYPE_DOC_TREE = "doc-tree"
 
@@ -66,7 +73,8 @@ class IniFormatFile(TemplateConfigFormat):
         config["document_path"] = {
             "src_dir": "",
             "dest_type": "",
-            "dest_dir": ""
+            "dest_dir": "",
+            "check_suffix": ""
         }        
         config["langs_settings"] = {
             "dest_lang": "",
@@ -80,7 +88,8 @@ class IniFormatFile(TemplateConfigFormat):
         dest_dir =  config["document_path"].get("dest_dir", ".").strip('"').strip("'") or "."
         dest_lang = config["langs_settings"].get("dest_lang", "").strip('"').strip("'") or ""
         split_colon = config["langs_settings"].get("split_colon", "").strip('"').strip("'") or ""
-  
+        check_suffixs = config["document_path"].get("check_suffix", "") or ""
+
         if not os.path.exists(src_dir):
             raise FileNotFoundError(f"Can not find waiting trans file: \n" \
                                     f"{os.path.abspath(src_dir)}!\n"\
@@ -88,6 +97,8 @@ class IniFormatFile(TemplateConfigFormat):
 
         if dest_type.strip().lower() == BATCH_SUMMON_TYPE_ALL_IN_ONE:
             batch_type = ALL_IN_ONE
+            if not os.path.exists(dest_dir):
+                os.makedirs(dest_dir)
         elif dest_type.strip().lower() == BATCH_SUMMON_TYPE_INSERT_DIR:
             batch_type = INSERT_IN
         else:
@@ -98,19 +109,28 @@ class IniFormatFile(TemplateConfigFormat):
 
         if split_colon == "":
             raise ValueError("Can not accept empty splits")        
+        
+        suffixs = [item.strip().strip('"').strip("'") for item in check_suffixs.split(',')]
+        if len(suffixs) == 0:
+            raise ValueError("Can not fetch the checking suffixs")        
 
         return BatchFileCLICommandArgPasser(
             src_dir_path=src_dir, dest_type=batch_type,
-            dest_dirent=dest_dir, dest_lang=dest_lang, split_colon=split_colon
+            dest_dirent=dest_dir, dest_lang=dest_lang, 
+            split_colon=split_colon, suffixs_handling=suffixs.copy()
         )
 
     def gen_empty_template(self, path: str, type_create: int):
+        if not path.endswith('.ini'):
+            path = f"{path}.ini"
         if type_create == TemplateConfigFormat.SINGLE_TYPE:
             IniFormatFile.__set_as_single_type()
         else:
             IniFormatFile.__set_as_doc_tree_type()
         with open(path, "w") as configfile:
             configfile.write(config_content)
+            if type_create == TemplateConfigFormat.DOC_TREE_TYPE:
+                configfile.write(batch_special_content)
             config.write(configfile)
 
 

@@ -8,7 +8,7 @@ class DocumentSummon:
     
     @staticmethod
     def default_policy_name(doc_path: str, lang_type: str) -> str:
-        return Path(doc_path).parent / str(Path(doc_path).stem + "_" + lang_type + Path(doc_path).suffix)
+        return str(Path(doc_path).parent / str(Path(doc_path).stem + "_" + lang_type + Path(doc_path).suffix))
 
     def redirect_path(self, path: str):
         self.__path_write = path
